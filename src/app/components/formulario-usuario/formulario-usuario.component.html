@@ -1,0 +1,56 @@
+<div class=" max-w-full flex" >
+  <div class="bg-sky-800  w-1/3 flex items-center justify-center">
+    <h1 class="font-black text-white " >Crear Usuario</h1>
+  </div>
+  
+  <div class="bg-slate-200 w-2/3 flex items-center justify-center " >
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="space-y-5 bg-white shadow p-10 rounded-lg" >
+        <div class="grid grid-cols-1 gap-3">
+          <label for="ClaveU" class="font-bold" >Clave del Usuario:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="text" id="ClaveU" formControlName="ClaveU">
+        </div>
+      
+        <div class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="NombreU">Nombre del Usuario:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="text" id="NombreU" formControlName="NombreU">
+        </div>
+      
+        <div class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="AppU">Apellido Paterno del Usuario:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="text" id="AppU" formControlName="AppU">
+        </div>
+      
+        <div class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="ApmU">Apellido Materno del Usuario:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="text" id="ApmU" formControlName="ApmU">
+        </div>
+      
+        <div class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="FechaRegistro">Fecha de Registro:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="date" id="FechaRegistro" formControlName="FechaRegistro">
+        </div>
+      
+        <div class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="FechaNac">Fecha de Nacimiento:</label>
+          <input class="border border-slate-300 p-2 rounded-lg" type="date" id="FechaNac" formControlName="FechaNac">
+        </div>
+      
+        <div formArrayName="Telefonos" class="grid grid-cols-1 gap-3">
+          <label class="font-bold" for="Telefonos">Teléfonos:</label>
+          @for (item of telefonos().controls; track $index) {
+              <div>
+                <input class="border border-slate-300 p-2 rounded-lg" type="text" [formControlName]="$index">
+                <button type="button" (click)="removeTelefono($index)">Eliminar</button>
+              </div>
+          }
+          <button type="button" (click)="addTelefono()">Agregar Teléfono</button>
+        </div>
+      
+        <button 
+          class="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase 
+        text-white cursor-pointer disabled:opacity-10"
+          type="submit" [disabled]="registroForm.invalid">Guardar</button>
+      </form>
+  </div>
+    
+</div>

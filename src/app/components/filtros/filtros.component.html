@@ -1,0 +1,57 @@
+<div class="max-w-full flex justify-center p-4">
+    <form [formGroup]="formFiltrar" (ngSubmit)="onSubmitTelf()" class="space-y-5 w-full max-w-md p-6 bg-white shadow rounded-lg">
+      <h1 class="text-xl font-bold mb-4">Filtrar Llamadas</h1>
+  
+      <div class="grid grid-cols-1 gap-3">
+        <label class="font-bold" for="ClaveU">Clave Usuario</label>
+        <input class="border border-slate-300 p-2 rounded-lg" id="ClaveU" formControlName="ClaveU" type="text">
+      </div>
+  
+      <div class="grid grid-cols-1 gap-3">
+        <label class="font-bold" for="NombreU">Nombre Usuario</label>
+        <input class="border border-slate-300 p-2 rounded-lg" id="NombreU" formControlName="NombreU" type="text">
+      </div>
+  
+      <div class="grid grid-cols-1 gap-3">
+        <label class="font-bold" for="NombreTipo">Nombre Tipo</label>
+        <select class="border border-slate-300 p-2 rounded-lg" id="NombreTipo" formControlName="NombreTipo">
+            @for (tipo of tipos; track $index) {
+                <option  [value]="tipo.id">{{ tipo.nombre }}</option>
+            }
+        </select>
+    </div>
+  
+    <div class="grid grid-cols-1 gap-3">
+        <label class="font-bold" for="TelefonoUsuario">Teléfono Usuario</label>
+        <select class="border border-slate-300 p-2 rounded-lg" id="NombreTipo" formControlName="TelefonoUsuario">
+            @for (telf of user.Telefonos; track $index) {
+                <option  [value]="telf">{{ telf }}</option>
+            }
+        </select>
+    </div>
+  
+      <button class="bg-blue-600 hover:bg-blue-700 w-full p-2 font-bold text-white rounded-lg" type="submit">Buscar</button>
+    </form>
+  
+    <div class="mt-6 w-full max-w-md">
+      <h2 class="text-lg font-bold mb-4">Resultados</h2>
+      @for (resultado of resultados; track $index) {
+          <div >
+            <div class="p-4 border rounded-lg mb-2">
+              <p><strong>Clave Usuario:</strong> {{ resultado.ClaveU }}</p>
+              <p><strong>Nombre Usuario:</strong> {{ resultado.NombreU }}</p>
+              <p><strong>Llamadas:</strong></p>
+              <ul>
+                @for (llamada of resultado.Llamadas; track $index) {
+                    <li >
+                      {{ llamada.TipoLlamada.NombreTipo }} - {{ llamada.TelefonoUsuario }}
+                    </li>
+                }
+              </ul>
+            </div>
+          </div>
+      }
+    
+    </div>
+  </div>
+  
